@@ -1,25 +1,23 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DJCRM</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <!-- Add this in the <head> section of your base template -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
 </head>
 <body>
-
     <div class="max-w-7xl mx-auto">
-        {% include "navbar.html" %}
+        {% include 'navbar.html' %}
+        {% include 'messages.html' %}
         {% block content %}
         {% endblock content %}
     </div>
-
     {% include "scripts.html" %}
-
 </body>
 </html>
