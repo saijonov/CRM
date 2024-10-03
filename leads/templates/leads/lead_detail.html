@@ -6,89 +6,220 @@
     <div class="container px-5 py-4 mx-auto">
         <div class="lg:w-4/5 mx-auto flex flex-wrap">
             <div class="w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
-                <div class="w-full flex items-center justify-between space-x-6">
-                    <div class="flex-1 truncate">
-                        <div class="flex items-center space-x-3">
-                            <h3 class="text-3xl text-gray-900 font-medium truncate">{{ lead.first_name }} {{ lead.last_name }}</h3>
+                <!-- Shipper Information -->
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">Shipper Information</h2>
+                    <div class="flex flex-col space-y-2">
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">First Name</span>
+                            <span class="text-gray-900">{{ lead.first_name }}</span>
                         </div>
-                        <p class="mt-1 text-xl text-gray-500 truncate">{{ lead.description }}</p>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Last Name</span>
+                            <span class="text-gray-900">{{ lead.last_name }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Company Name</span>
+                            <span class="text-gray-900">{{ lead.company_name }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Email</span>
+                            <span class="text-gray-900">{{ lead.email }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Phone</span>
+                            <span class="text-gray-900">{{ lead.phone_number }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Phone (Other)</span>
+                            <span class="text-gray-900">{{ lead.phone_other }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Fax</span>
+                            <span class="text-gray-900">{{ lead.fax }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Billing Address</span>
+                            <span class="text-gray-900">{{ lead.billing_address }}</span>
+                        </div>
                     </div>
-                    {% if lead.profile_picture %}
-                    <img class="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0" src="{{ lead.profile_picture.url }}" alt="">
-                    {% endif %}
                 </div>
-                <div class="flex mb-4">
-                    <a href="{% url 'leads:lead-detail' lead.pk %}" class="flex-grow text-indigo-500 border-b-2 border-indigo-500 py-2 text-lg px-1">
-                        Overview
+
+                <!-- Origin & Destination -->
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">Origin & Destination</h2>
+                    <div class="grid grid-cols-2 gap-8">
+                        <!-- Origin -->
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Origin</h3>
+                            <div class="flex flex-col space-y-2">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">City</span>
+                                    <span class="text-gray-900">{{ lead.origin_city }}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">State</span>
+                                    <span class="text-gray-900">{{ lead.origin_state }}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">Zip</span>
+                                    <span class="text-gray-900">{{ lead.origin_zip }}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">Country</span>
+                                    <span class="text-gray-900">{{ lead.origin_country }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Destination -->
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Destination</h3>
+                            <div class="flex flex-col space-y-2">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">City</span>
+                                    <span class="text-gray-900">{{ lead.destination_city }}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">State</span>
+                                    <span class="text-gray-900">{{ lead.destination_state }}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">Zip</span>
+                                    <span class="text-gray-900">{{ lead.destination_zip }}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">Country</span>
+                                    <span class="text-gray-900">{{ lead.destination_country }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shipping Information -->
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">Shipping Information</h2>
+                    <div class="flex flex-col space-y-2">
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Estimated Ship Date</span>
+                            <span class="text-gray-900">{{ lead.estimated_ship_date }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Notes from Shipper</span>
+                            <span class="text-gray-900">{{ lead.notes_from_shipper }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Vehicle(s) Run</span>
+                            <span class="text-gray-900">{{ lead.vehicle_run }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Ship Via</span>
+                            <span class="text-gray-900">{{ lead.ship_via }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vehicle Information -->
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">Vehicle Information</h2>
+                    <div class="flex flex-col space-y-2">
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Year</span>
+                            <span class="text-gray-900">{{ lead.vehicle_year }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Make</span>
+                            <span class="text-gray-900">{{ lead.vehicle_make }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Model</span>
+                            <span class="text-gray-900">{{ lead.vehicle_model }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Type</span>
+                            <span class="text-gray-900">{{ lead.vehicle_type }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Tariff</span>
+                            <span class="text-gray-900">{{ lead.vehicle_tariff }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Deposit</span>
+                            <span class="text-gray-900">{{ lead.vehicle_deposit }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pricing Information -->
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">Pricing Information</h2>
+                    <div class="flex flex-col space-y-2">
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Total Tariff</span>
+                            <span class="text-gray-900">{{ lead.total_tariff }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Deposit</span>
+                            <span class="text-gray-900">{{ lead.deposit }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex space-x-4">
+                    <a href="{% url 'leads:lead-category-update' lead.pk %}" class="text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md">
+                        Update Category
                     </a>
-                    <a href="{% url 'leads:lead-category-update' lead.pk %}" class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">
-                        Category
-                    </a>
-                    <a href="{% url 'leads:lead-update' lead.pk %}" class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">
+                    <a href="{% url 'leads:lead-update' lead.pk %}" class="text-white bg-green-500 hover:bg-green-600 px-4 py-2 rounded-md">
                         Update Details
-                    </a>    
-                </div>
-                <div class="flex border-t border-gray-300 py-2">
-                    <span class="text-gray-500">Age</span>
-                    <span class="ml-auto text-gray-900">{{ lead.age }}</span>
-                </div>
-                <div class="flex border-t border-gray-300 py-2">
-                    <span class="text-gray-500">Email</span>
-                    <span class="ml-auto text-gray-900">{{ lead.email }}</span>
-                </div>
-                <div class="flex border-t border-b mb-6 border-gray-300 py-2">
-                    <span class="text-gray-500">Phone Number</span>
-                    <span class="ml-auto text-gray-900">{{ lead.phone_number }}</span>
+                    </a>
+                    <a href="{% url 'leads:lead-followup-create' lead.pk %}" class="text-white bg-indigo-500 hover:bg-indigo-600 px-4 py-2 rounded-md">
+                        Add a Follow-up
+                    </a>
                 </div>
             </div>
-
-        <a href="{% url 'leads:lead-followup-create' lead.pk %}" class="text-white bg-blue-500 hover:bg-blue-600 px-3 py-2 rounded-md">Add a followup</a>
-
         </div>
 
+        <!-- Follow-ups -->
         {% for followup in lead.followups.all %}
             <div class="mt-5 shadow px-4 sm:px-6">
                 <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
                     <dt class="text-sm font-medium text-gray-500">
-                    Notes (<a href="{% url 'leads:lead-followup-update' followup.pk %}" class="text-blue-500 hover:text-blue-700">update</a>)
+                        Notes (<a href="{% url 'leads:lead-followup-update' followup.pk %}" class="text-blue-500 hover:text-blue-700">update</a>)
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    {{ followup.notes }}
+                        {{ followup.notes }}
                     </dd>
                 </div>
                 {% if followup.file %}
                     <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
                         <dt class="text-sm font-medium text-gray-500">
-                        Attachments
+                            Attachments
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        <ul class="border border-gray-200 rounded-md divide-y divide-gray-200">
-                            <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
-                                <div class="w-0 flex-1 flex items-center">
-                                    <!-- Heroicon name: paper-clip -->
-                                    <svg class="flex-shrink-0 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                    <path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd" />
-                                    </svg>
-                                    <span class="ml-2 flex-1 w-0 truncate">
-                                    {{ followup.file.name }}
-                                    </span>
-                                </div>
-                                <div class="ml-4 flex-shrink-0">
-                                    <a href="{{ followup.file.url }}" download class="font-medium text-indigo-600 hover:text-indigo-500">
-                                    Download
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
+                            <ul class="border border-gray-200 rounded-md divide-y divide-gray-200">
+                                <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
+                                    <div class="w-0 flex-1 flex items-center">
+                                        <svg class="flex-shrink-0 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd" />
+                                        </svg>
+                                        <span class="ml-2 flex-1 w-0 truncate">
+                                            {{ followup.file.name }}
+                                        </span>
+                                    </div>
+                                    <div class="ml-4 flex-shrink-0">
+                                        <a href="{{ followup.file.url }}" download class="font-medium text-indigo-600 hover:text-indigo-500">
+                                            Download
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
                         </dd>
                     </div>
                 {% endif %}
             </div>
         {% endfor %}
 
-
-        
-
     </div>
-  </section>
+</section>
 {% endblock content %}

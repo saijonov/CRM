@@ -21,23 +21,75 @@ class LeadManager(models.Manager):
 
 
 class Lead(models.Model):
+    # Shipper Information
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
-    age = models.IntegerField(default=0)
+    company_name = models.CharField(max_length=100, null=True, blank=True)
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=20)
+    phone_other = models.CharField(max_length=20, null=True, blank=True)
+    faxx = models.CharField(max_length=20, null=True, blank=True)
+    billing_address = models.TextField(null=True, blank=True)
+
+    # Origin & Destination Information
+    origin_zip_code = models.CharField(max_length=10, blank=True)  # Origin zip code field
+    origin_city = models.CharField(max_length=100, blank=True)      # Origin city field
+    origin_state = models.CharField(max_length=100, blank=True)     # Origin state field
+    origin_country = models.CharField(max_length=100, blank=True)     # Origin state field
+
+    destination_zip_code = models.CharField(max_length=10, blank=True)  # Destination zip code field
+    destination_city = models.CharField(max_length=100, blank=True)      # Destination city field
+    destination_state = models.CharField(max_length=100, blank=True)  # Or another default value
+    destination_country = models.CharField(max_length=100, blank=True) 
+
+
+    # Shipping Information
+    estimated_ship_date = models.DateField(null=True, blank=True)
+    notes_from_shipper = models.TextField(null=True, blank=True)
+    vehicle_run = models.BooleanField(default=False)
+    ship_via = models.CharField(max_length=50, null=True, blank=True)
+
+    # Vehicle Information
+    vehicle_year = models.CharField(max_length=4, default='Unknown')
+    vehicle_make = models.CharField(max_length=50, default='Unknown')
+    vehicle_model = models.CharField(max_length=50, default='Unknown')
+    vehicle_type = models.CharField(max_length=50, default='Unknown')
+    vehicle_tariff = models.CharField(max_length=50, default='Unknown')
+    vehicle_deposit = models.CharField(max_length=50, default='Unknown')
+
+
+    # Pricing Information
+    total_tariff = models.CharField(max_length=50, default='Unknown')
+    deposit = models.CharField(max_length=50, default='Unknown')
+
     organisation = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     agent = models.ForeignKey("Agent", null=True, blank=True, on_delete=models.SET_NULL)
     category = models.ForeignKey("Category", related_name="leads", null=True, blank=True, on_delete=models.SET_NULL)
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
-    phone_number = models.CharField(max_length=20)
-    email = models.EmailField()
-    profile_picture = models.ImageField(null=True, blank=True, upload_to="profile_pictures/")
     converted_date = models.DateTimeField(null=True, blank=True)
 
     objects = LeadManager()
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+    
+
+    order_id = models.IntegerField(unique=True, null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if self.order_id is None:
+            # Get the last order ID from the database, if any
+            last_order = Lead.objects.order_by('order_id').last()
+            if last_order:
+                self.order_id = last_order.order_id + 1
+            else:
+                self.order_id = 10400001  # Starting order ID
+        
+        super().save(*args, **kwargs)
+
+
+
 
 
 def handle_upload_follow_ups(instance, filename):

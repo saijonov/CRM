@@ -150,38 +150,29 @@ def lead_detail(request, pk):
     return render(request, "leads/lead_detail.html", context)
 
 
+
 class LeadCreateView(OrganisorAndLoginRequiredMixin, generic.CreateView):
     template_name = "leads/lead_create.html"
     form_class = LeadModelForm
 
-    def get_success_url(self):
-        return reverse("leads:lead-list")
-
     def form_valid(self, form):
-        lead = form.save(commit=False)
-        lead.organisation = self.request.user.userprofile
-        lead.save()
+        lead = form.save(commit=False)  # Create a lead instance without saving to the database yet
+        lead.organisation = self.request.user.userprofile  # Assign the user's organisation
+        lead.save()  # Now save the lead instance
+        
+        # Optional: Send email logic
         send_mail(
             subject="A lead has been created",
             message="Go to the site to see the new lead",
             from_email="test@test.com",
             recipient_list=["test2@test.com"]
         )
+        
         messages.success(self.request, "You have successfully created a lead")
-        return super(LeadCreateView, self).form_valid(form)
+        return super().form_valid(form)  # Call the superclass's form_valid method
 
-
-def lead_create(request):
-    form = LeadModelForm()
-    if request.method == "POST":
-        form = LeadModelForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect("/leads")
-    context = {
-        "form": form
-    }
-    return render(request, "leads/lead_create.html", context)
+    def get_success_url(self):
+        return reverse("leads:lead-list")  # Redirect to the lead list page after a successful submission
 
 
 class LeadUpdateView(OrganisorAndLoginRequiredMixin, generic.UpdateView):

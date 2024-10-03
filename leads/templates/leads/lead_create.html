@@ -8,12 +8,29 @@
     <div class="py-5 border-t border-gray-200">
         <h1 class="text-4xl text-gray-800">Create a new lead</h1>
     </div>
-    <form method="post" class="mt-5">
+    <form method="post" class="mt-5" action="{% url 'leads:lead-create' %}">
         {% csrf_token %}
         {{ form|crispy }}
-        <button type='submit' class="w-full text-white bg-blue-500 hover:bg-blue-600 px-3 py-2 rounded-md">
+        <button type="submit" class="w-full text-white bg-blue-500 hover:bg-blue-600 px-3 py-2 rounded-md">
             Submit
         </button>
+
+        {% if form.errors %}
+            <div class="mt-4">
+                <ul class="text-red-600">
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+
     </form>
 </div>
 

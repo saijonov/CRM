@@ -6,37 +6,54 @@ from .models import Lead, Agent, Category, FollowUp
 
 User = get_user_model()
 
-
 class LeadModelForm(forms.ModelForm):
     class Meta:
         model = Lead
         fields = (
-            'first_name',
+            'first_name',           # Shipper Information
             'last_name',
-            'age',
-            'agent',
-            'description',
-            'phone_number',
+            'company_name',
             'email',
-            'profile_picture'
+            'phone_number',
+            'faxx',
+            'billing_address',
+            'phone_other',
+            'origin_city',           # Origin & Destination
+            'origin_state',
+            'origin_zip_code',
+            'origin_country',
+            'destination_city',
+            'destination_state',
+            'destination_zip_code',
+            'destination_country',
+            'estimated_ship_date',   # Shipping Information
+            'notes_from_shipper',
+            'vehicle_run',
+            'ship_via',
+            'vehicle_year',          # Vehicle Information
+            'vehicle_make',
+            'vehicle_model',
+            'vehicle_type',
+            'vehicle_tariff',
+            'vehicle_deposit',
+            'total_tariff',          # Pricing Information
+            'deposit'
         )
+
+    # You can add validation for specific fields here if needed
+
+
 
     def clean_first_name(self):
         data = self.cleaned_data["first_name"]
-        # if data != "Joe":
-        #     raise ValidationError("Your name is not Joe")
         return data
 
     def clean(self):
         pass
-        # first_name = self.cleaned_data["first_name"]
-        # last_name = self.cleaned_data["last_name"]
-        # if first_name + last_name != "Joe Soap":
-        #     raise ValidationError("Your name is not Joe Soap")
-
 
 
 class LeadForm(forms.Form):
+    # Simplified version, same as before
     first_name = forms.CharField()
     last_name = forms.CharField()
     age = forms.IntegerField(min_value=0)
@@ -62,23 +79,16 @@ class AssignAgentForm(forms.Form):
 class LeadCategoryUpdateForm(forms.ModelForm):
     class Meta:
         model = Lead
-        fields = (
-            'category',
-        )
+        fields = ('category',)
 
 
 class CategoryModelForm(forms.ModelForm):
     class Meta:
         model = Category
-        fields = (
-            'name',
-        )
+        fields = ('name',)
 
 
 class FollowUpModelForm(forms.ModelForm):
     class Meta:
         model = FollowUp
-        fields = (
-            'notes',
-            'file'
-        )
+        fields = ('notes', 'file')

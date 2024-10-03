@@ -10,7 +10,7 @@ class LeadAdmin(admin.ModelAdmin):
     #     'last_name',
     # )
 
-    list_display = ['first_name', 'last_name', 'age', 'email']
+    list_display = ['first_name', 'last_name', 'email']
     list_display_links = ['first_name']
     list_editable = ['last_name']
     list_filter = ['category']
