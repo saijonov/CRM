@@ -50,17 +50,17 @@ class Lead(models.Model):
     ship_via = models.CharField(max_length=50, null=True, blank=True)
 
     # Vehicle Information
-    vehicle_year = models.CharField(max_length=4, default='Unknown')
-    vehicle_make = models.CharField(max_length=50, default='Unknown')
-    vehicle_model = models.CharField(max_length=50, default='Unknown')
-    vehicle_type = models.CharField(max_length=50, default='Unknown')
-    vehicle_tariff = models.CharField(max_length=50, default='Unknown')
-    vehicle_deposit = models.CharField(max_length=50, default='Unknown')
+    vehicle_year = models.CharField(max_length=4, blank=True)
+    vehicle_make = models.CharField(max_length=50, blank=True)
+    vehicle_model = models.CharField(max_length=50, blank=True)
+    vehicle_type = models.CharField(max_length=50, blank=True)
+    vehicle_tariff = models.CharField(max_length=50, blank=True)
+    vehicle_deposit = models.CharField(max_length=50, blank=True)
 
 
     # Pricing Information
-    total_tariff = models.CharField(max_length=50, default='Unknown')
-    deposit = models.CharField(max_length=50, default='Unknown')
+    total_tariff = models.CharField(max_length=50, blank=True)
+    deposit = models.CharField(max_length=50, blank=True)
 
     organisation = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     agent = models.ForeignKey("Agent", null=True, blank=True, on_delete=models.SET_NULL)

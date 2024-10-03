@@ -7,7 +7,7 @@
     <div class="container px-6 py-8 mx-auto">
         <div class="lg:w-4/5 mx-auto flex flex-wrap bg-white shadow-lg rounded-lg">
             <div class="w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0 p-6">
-                <h2 class="text-sm title-font text-gray-500 tracking-widest uppercase">Lead Details</h2>
+                <h2 class="text-sm title-font text-gray-500 tracking-widest uppercase">Lead Update</h2>
                 <h1 class="text-gray-900 text-4xl title-font font-semibold mb-4">{{ lead.first_name }} {{ lead.last_name }}</h1>
 
                 <div class="flex mb-4 space-x-4">
@@ -22,10 +22,178 @@
                     </a>
                 </div>
 
-                <form method="post" enctype="multipart/form-data" class="mb-4">
+                <form method="post" enctype="multipart/form-data" class="mt-5 space-y-6">
                     {% csrf_token %}
-                    {{ form|crispy }}
+                    <!-- Shipper Information -->
+                    <div class="bg-white shadow-md rounded-lg p-6 space-y-4">
+                        <h2 class="text-2xl font-semibold">Shipper Information</h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                {{ form.first_name.label }}
+                                <input type="text" name="first_name" value="{{ form.first_name.value }}" class="border rounded-md p-2 w-full" placeholder="First Name" />
+                            </div>
+                            <div>
+                                {{ form.last_name.label }}
+                                <input type="text" name="last_name" value="{{ form.last_name.value }}" class="border rounded-md p-2 w-full" placeholder="Last Name" />
+                            </div>
+                            <div>
+                                {{ form.company_name.label }}
+                                <input type="text" name="company_name" value="{{ form.company_name.value }}" class="border rounded-md p-2 w-full" placeholder="Company Name" />
+                            </div>
+                            <div>
+                                {{ form.email.label }}
+                                <input type="email" name="email" value="{{ form.email.value }}" class="border rounded-md p-2 w-full" placeholder="Email" />
+                            </div>
+                            <div>
+                                {{ form.phone_number.label }}
+                                <input type="text" name="phone_number" value="{{ form.phone_number.value }}" class="border rounded-md p-2 w-full" placeholder="Phone Number" />
+                            </div>
+                            <div>
+                                {{ form.faxx.label }}
+                                <input type="text" name="faxx" value="{{ form.faxx.value }}" class="border rounded-md p-2 w-full" placeholder="Fax Number" />
+                            </div>
+                            <div>
+                                {{ form.billing_address.label }}
+                                <textarea name="billing_address" class="border rounded-md p-2 w-full" placeholder="Billing Address">{{ form.billing_address.value }}</textarea>
+                            </div>
+                            <div>
+                                {{ form.phone_other.label }}
+                                <input type="text" name="phone_other" value="{{ form.phone_other.value }}" class="border rounded-md p-2 w-full" placeholder="Other Phone" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Origin and Destination -->
+                    <div class="bg-white shadow-md rounded-lg p-6 space-y-4">
+                        <h2 class="text-2xl font-semibold">Origin & Destination</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="p-4 border border-gray-300 rounded-md">
+                                <h3 class="text-lg font-semibold">Origin</h3>
+                                <div>
+                                    {{ form.origin_city.label }}
+                                    <input type="text" name="origin_city" value="{{ form.origin_city.value }}" class="border rounded-md p-2 w-full" placeholder="City" />
+                                </div>
+                                <div>
+                                    {{ form.origin_state.label }}
+                                    <input type="text" name="origin_state" value="{{ form.origin_state.value }}" class="border rounded-md p-2 w-full" placeholder="State" />
+                                </div>
+                                <div>
+                                    {{ form.origin_zip_code.label }}
+                                    <input type="text" name="origin_zip_code" value="{{ form.origin_zip_code.value }}" class="border rounded-md p-2 w-full" placeholder="Zip Code" />
+                                </div>
+                                <div>
+                                    {{ form.origin_country.label }}
+                                    <input type="text" name="origin_country" value="{{ form.origin_country.value }}" class="border rounded-md p-2 w-full" placeholder="Country" />
+                                </div>
+                            </div>
+
+                            <div class="p-4 border border-gray-300 rounded-md">
+                                <h3 class="text-lg font-semibold">Destination</h3>
+                                <div>
+                                    {{ form.destination_city.label }}
+                                    <input type="text" name="destination_city" value="{{ form.destination_city.value }}" class="border rounded-md p-2 w-full" placeholder="City" />
+                                </div>
+                                <div>
+                                    {{ form.destination_state.label }}
+                                    <input type="text" name="destination_state" value="{{ form.destination_state.value }}" class="border rounded-md p-2 w-full" placeholder="State" />
+                                </div>
+                                <div>
+                                    {{ form.destination_zip_code.label }}
+                                    <input type="text" name="destination_zip_code" value="{{ form.destination_zip_code.value }}" class="border rounded-md p-2 w-full" placeholder="Zip Code" />
+                                </div>
+                                <div>
+                                    {{ form.destination_country.label }}
+                                    <input type="text" name="destination_country" value="{{ form.destination_country.value }}" class="border rounded-md p-2 w-full" placeholder="Country" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Shipping Information -->
+                    <div class="bg-white shadow-md rounded-lg p-6 space-y-4">
+                        <h2 class="text-2xl font-semibold">Shipping Information</h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                {{ form.estimated_ship_date.label }}
+                                <input type="date" name="estimated_ship_date" value="{{ form.estimated_ship_date.value }}" class="border rounded-md p-2 w-full" />
+                            </div>
+                            <div>
+                                {{ form.notes_from_shipper.label }}
+                                <textarea name="notes_from_shipper" class="border rounded-md p-2 w-full" placeholder="Notes from Shipper">{{ form.notes_from_shipper.value }}</textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vehicle Information -->
+                    <div class="bg-white shadow-md rounded-lg p-6 space-y-4">
+                        <h2 class="text-2xl font-semibold">Vehicle Information</h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                {{ form.vehicle_run.label }}
+                                <input type="text" name="vehicle_run" value="{{ form.vehicle_run.value }}" class="border rounded-md p-2 w-full" placeholder="Run" />
+                            </div>
+                            <div>
+                                {{ form.ship_via.label }}
+                                <input type="text" name="ship_via" value="{{ form.ship_via.value }}" class="border rounded-md p-2 w-full" placeholder="Ship Via" />
+                            </div>
+                            <div>
+                                {{ form.vehicle_year.label }}
+                                <input type="text" name="vehicle_year" value="{{ form.vehicle_year.value }}" class="border rounded-md p-2 w-full" placeholder="Vehicle Year" />
+                            </div>
+                            <div>
+                                {{ form.vehicle_make.label }}
+                                <input type="text" name="vehicle_make" value="{{ form.vehicle_make.value }}" class="border rounded-md p-2 w-full" placeholder="Vehicle Make" />
+                            </div>
+                            <div>
+                                {{ form.vehicle_model.label }}
+                                <input type="text" name="vehicle_model" value="{{ form.vehicle_model.value }}" class="border rounded-md p-2 w-full" placeholder="Vehicle Model" />
+                            </div>
+                            <div>
+                                {{ form.vehicle_type.label }}
+                                <input type="text" name="vehicle_type" value="{{ form.vehicle_type.value }}" class="border rounded-md p-2 w-full" placeholder="Vehicle Type" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pricing Information -->
+                    <div class="bg-white shadow-md rounded-lg p-6 space-y-4">
+                        <h2 class="text-2xl font-semibold">Pricing Information</h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                {{ form.vehicle_tariff.label }}
+                                <input type="text" name="vehicle_tariff" value="{{ form.vehicle_tariff.value }}" class="border rounded-md p-2 w-full" placeholder="Vehicle Tariff" />
+                            </div>
+                            <div>
+                                {{ form.vehicle_deposit.label }}
+                                <input type="text" name="vehicle_deposit" value="{{ form.vehicle_deposit.value }}" class="border rounded-md p-2 w-full" placeholder="Vehicle Deposit" />
+                            </div>
+                            <div>
+                                {{ form.total_tariff.label }}
+                                <input type="text" name="total_tariff" value="{{ form.total_tariff.value }}" class="border rounded-md p-2 w-full" placeholder="Total Tariff" />
+                            </div>
+                            <div>
+                                {{ form.deposit.label }}
+                                <input type="text" name="deposit" value="{{ form.deposit.value }}" class="border rounded-md p-2 w-full" placeholder="Deposit" />
+                            </div>
+                        </div>
+                    </div>
+
                     <button type="submit" class="w-full text-white bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Submit</button>
+
+                    {% if form.errors %}
+                        <div class="mt-4">
+                            <ul class="text-red-600">
+                                {% for field in form %}
+                                    {% for error in field.errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                {% endfor %}
+                                {% for error in form.non_field_errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
                 </form>
 
                 <div class="mt-5 py-5 border-t border-gray-200">

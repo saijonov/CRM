@@ -41,7 +41,11 @@ class LeadModelForm(forms.ModelForm):
         )
 
     # You can add validation for specific fields here if needed
-
+    widgets = {
+            'first_name': forms.TextInput(attrs={'class': 'border rounded-md p-2 w-full'}),
+            'last_name': forms.TextInput(attrs={'class': 'border rounded-md p-2 w-full'}),
+            # Add other fields similarly
+        }
 
 
     def clean_first_name(self):
